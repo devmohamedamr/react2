@@ -16,14 +16,16 @@ export default function Crud() {
                     <th>id</th>
                     <th>name</th>
                     <th>email</th>
+                    <th>delete</th>
                 </tr>
             </thead>
             <tbody>
-                {users.map((user)=> 
-                    <tr>
+                {users.map((user,index)=> 
+                    <tr key={index}>
                         <td>{user.id}</td>
                         <td>{user.name}</td>
                         <td>{user.email}</td>
+                        <td><button onClick={_=>destroy(index)}>delete</button></td>
                     </tr>
                 )}
             </tbody>
@@ -45,6 +47,13 @@ export default function Crud() {
     // 2- push -> copy
     newusers.push(data)
     // 3 copy set state 
+    setUsers(newusers)
+  }
+
+  function destroy(id){
+    let newusers = [...users]
+    newusers.splice(id,1)
+    // console.log(newusers)
     setUsers(newusers)
   }
 }
